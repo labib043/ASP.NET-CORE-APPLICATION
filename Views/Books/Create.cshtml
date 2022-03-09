@@ -1,0 +1,90 @@
+﻿@model crudcore.Model.Book
+
+@{
+    Layout = "_Layout";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+
+</head>
+<body>
+
+    <h4>Book</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" asp-controller="Books"
+                  data-ajax="true"
+                  enctype="multipart/form-data"
+                  data-ajax-method="POST"
+                  data-ajax-success="OnSuccessFC"
+                  data-ajax-failure="OnFailureFC"
+                  data-ajax-begin="OnBeginFC"
+                  data-ajax-complete="OnCompleteFC">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="BookName" class="control-label"></label>
+                    <input asp-for="BookName" class="form-control" />
+                    <span asp-validation-for="BookName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="file" id="Image" name="Image" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="PublishDate" class="control-label"></label>
+                    <input type="date" name="PublishDate" id="PublishDate" />
+                    <span asp-validation-for="PublishDate" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="availability" /> @Html.DisplayNameFor(model => model.availability)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PublicationID_FK" class="control-label"></label>
+                    <select asp-for="PublicationID_FK" class="form-control" asp-items="ViewBag.PublicationID_FK"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+
+    <script>
+
+
+        function OnSuccessFC(response) {
+            alert("OnSuccess");
+        }
+        function OnFailureFC(response) {
+            alert("OnFailure");
+        }
+
+        function OnBeginFC() {
+            alert("OnBegin");
+        }
+
+        function OnCompleteFC() {
+            alert("OnComplete");
+        }
+
+
+    </script>
+
+
+</body>
+</html>
